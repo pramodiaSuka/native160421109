@@ -2,10 +2,23 @@ package com.maverick.anmp_week1
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.navigation.NavController
+import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.ui.NavigationUI
 
 class MainActivity : AppCompatActivity() {
+    private lateinit var navController:NavController
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        //set up navigation controller
+        navController = (supportFragmentManager.findFragmentById(R.id.navHost) as NavHostFragment).navController
+        NavigationUI.setupActionBarWithNavController(this, navController)
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        //navigate ke urutan backstack sebelumnya
+        return navController.navigateUp()
     }
 }
